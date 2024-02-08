@@ -8,3 +8,11 @@ function draw() {
     ctx.strokeRect(50, 50, 50, 50);
   }
 }
+
+function drawcurve()
+{
+  
+}
+
+draw();
+drawcurve();
