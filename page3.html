@@ -33,7 +33,17 @@
     <p>test</p>
     <div style="background-color:white">
       <br></br>
-      <p class="block_text">code test</p>
+      <p class="block_text">
+          ORG userMem-2 <br />
+          DB $BB, $6D <br />
+        Start: <br />
+          BCALL ClrLCDFull <br />
+          BCALL RunIndicOff <br />
+          CALL SETUP <br />
+        GLOOP:<br />
+          
+        
+      </p>
       <br></br>
     </div>
     
