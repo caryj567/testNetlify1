@@ -18,7 +18,7 @@
       {
         color:white;
       }	
-	.var{color:powderblue;}
+	.var{color:#245CB5;}
 	.struct{color:green}
 	.type{color:blue;}
     </style>
@@ -50,10 +50,10 @@
 	<font class="var">plane</font> = bsp->planes[bsp->nodes[node].plane_ofs];
 	<font class="var">res</font> = DotProduct(<font class="var">plane</font>.normal, point) - <font class="var">plane</font>.dist;
 		
-	if (<font class="var">res >= 0)
-		<font class="var">nextnode = bsp->nodes[node].children[0];
+	if (<font class="var">res</font> >= 0)
+		<font class="var">nextnode</font> = bsp->nodes[node].children[0];
 	else
-		<font class="var">nextnode = bsp->nodes[node].children[1]; //back
+		<font class="var">nextnode</font> = bsp->nodes[node].children[1]; //back
 		
 	RecursiveBSPNodeSearch(point, bsp, <font class="var">nextnode</font>)<br>
 }
