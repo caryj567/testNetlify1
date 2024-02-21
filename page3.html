@@ -29,18 +29,30 @@
     <h2>Introduction</h2>
     <p>Intro text</p>
     
-    <h2>Main Function</h2>
+    <h2>BSP leaf search</h2>
     <p>test</p>
     <div style="background-color:white">
       <br></br>
       <p class="block_text">
-          ORG userMem-2 <br />
-          DB $BB, $6D <br />
-        Start: <br />
-          BCALL ClrLCDFull <br />
-          BCALL RunIndicOff <br />
-          CALL SETUP <br />
-        GLOOP:<br />
+          int RecursiveBSPNodeSearch(vec3_t point, bsp_t* bsp, int node)<br>
+          {<br>
+	         bspplane_t plane;<br>
+	         float res;<br>
+	         int nextnode;<br>
+
+	         if (node < 0)<br>
+		         return ~node;<br>
+
+	         plane = bsp->planes[bsp->nodes[node].plane_ofs];<br>
+	         res = DotProduct(plane.normal, point) - plane.dist;<br>
+
+	         if (res >= 0)<br>
+		         nextnode = bsp->nodes[node].children[0];<br>
+	         else<br>
+		         nextnode = bsp->nodes[node].children[1]; //back<br>
+
+	         RecursiveBSPNodeSearch(point, bsp, nextnode<br>
+         }<br>
           
         
       </p>
