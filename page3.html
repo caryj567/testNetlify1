@@ -104,16 +104,16 @@
 
 	<font class="com">//handle the segment being intersected by the plane</font>
 	<font class="var">frac</font> = <font class="var">dist1</font> / (<font class="var">dist1</font> - <font class="var">dist2</font>);
-	for (int i = 0; i < 3; i++)
-		split[i] = start[i] + frac * (end[i] - start[i]);
+	for (int <font class="var">i</font> = 0; <font class="var">i</font> < 3; <font class="var">i</font>++)
+		<font class="var">split</font>[<font class="var">i</font>] = <font class="var">start[i</font>] + <font class="var">frac</font> * (end[<font class="var">i</font>] - start[<font class="var">i</font>]);
 
 	<font class="com">//this is the side that start is on</font>
-	side = (dist1 >= 0) ? 0 : 1;
+	<font class="var">side</font> = (<font class="var">dist1</font> >= 0) ? 0 : 1;
 
-	<font class="com">//go through the children in order now
-	if (RecursiveBSPClipNodeSearch(start, split, bsp, curnode->children[side], hit, plane))
+	<font class="com">//go through the children in order now</font>
+	if (RecursiveBSPClipNodeSearch(start, <font class="var">split</font>, bsp, curnode->children[<font class="var">side</font>], <font class="var">hit</font>, plane))
 		return 1;
-	return RecursiveBSPClipNodeSearch(split, end, bsp, curnode->children[1 - side], hit, plane);
+	return RecursiveBSPClipNodeSearch(<font class="var">split</font>, end, bsp, curnode->children[1 - <font class="var">side</font>], <font class="var">hit</font>, plane);
 }
 				
 			</pre>
