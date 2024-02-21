@@ -22,6 +22,8 @@
 	.var{color:#245CB5;}
 	.struct{color:green}
 	.type{color:blue;}
+	.def{color:purple;}
+	.com{color:forestgreen;}
     </style>
   </head>
   <body style="background-color:black">
@@ -34,16 +36,16 @@
     <p>Intro text</p>
     
     <h2>BSP leaf search</h2>
-    <p>test</p>
+    <p>Explain this here</p>
     <div style="background-color:white">
       <br></br>
       <p class="block_text">
 	<pre>
 <font class="type">int</font> <font class="func">RecursiveBSPNodeSearch</font>(<font class="struct">vec3_t</font> point, <font class="struct">bsp_t</font>* bsp, <font class="type">int</font> node)
 {
-	<font class="struct">bspplane_t</font> plane;
-	<font class="type">float</font> res;
-	<font class="type">int</font> nextnode;
+	<font class="struct">bspplane_t</font> <font class="var">plane</font>;
+	<font class="type">float</font> <font class="var">res</font>;
+	<font class="type">int</font> <font class="var">nextnode</font>;
 		
 	if (<font class="var">node</font> < 0)
 	        return ~node;
@@ -54,7 +56,7 @@
 	if (<font class="var">res</font> >= 0)
 		<font class="var">nextnode</font> = bsp->nodes[node].children[0];
 	else
-		<font class="var">nextnode</font> = bsp->nodes[node].children[1]; //back
+		<font class="var">nextnode</font> = bsp->nodes[node].children[1]; <font class="com">//back</font>
 		
 	<font class="func">RecursiveBSPNodeSearch</font>(point, bsp, <font class="var">nextnode</font>)<br>
 }
@@ -64,11 +66,59 @@
       <br></br>
     </div>
     
-    <h2>Procedures</h2>
-    <p>test</p>
-    
-    <h2>Variables</h2>
-    <p>test</p>
+    <h2>BSP clip node search</h2>
+    <p>Explain here</p>
+	<div style="background-color:white">
+		<p class="block_text">
+			<pre>
+<font class="type">int</font> RecursiveBSPClipNodeSearch</font>(<font class="struct">vec3_t</font> start, <font class="struct">vec3_t</font> end, <font class="struct">bsp_t</font>* bsp, <font class="type">int</font> node, <font class="struct">vec3_t</font> hit, <font class="struct">bspplane_t</font>*& plane)
+{
+	<font class="struct">bspclip_t</font>* <font class="var">curnode</font>;
+	<font class="type">float</font> <font class="var">dist1</font>, <font class="var">dist2</font>;
+	<font class="type">float</font> <font class="var">frac</font>;
+	<font class="struct">vec3_t</font> <font class="var">split</font>;
+	<font class="type">bool</font> <font class="var">side</font>;
+
+	//handle leaves
+	if (node == <font class="def">CONTENTS_SOLID</font>)
+	{
+		VecCopy</font>(<font class="var">hit</font>, start);
+		return 1;
+	}
+	else if (node == <font class="def">CONTENTS_EMPTY</font>)
+	{<font class="com">//outside world</font>
+		return 0;
+	}
+
+
+	<font class="var">curnode</font> = &bsp->clips[node];
+	plane = &bsp->planes[curnode->plane];
+	<font class="var">dist1</font> = <font class="func">DotProduct</font>(plane->normal, start - plane->dist;
+	<font class="var">dist2</font> = <font class="func">DotProduct</font>(plane->normal, end) - plane->dist;
+
+	<font class="com">//handle case where the segment lies entirely in a child</font>
+	if (<font class="var">dist1</font> >= 0 && <font class="var">dist2</font> >= 0)
+		return RecursiveBSPClipNodeSearch(start, end, bsp, curnode->children[0], <font class="var">hit</font>, plane);
+	if (<font class="var">dist1</font> < 0 && <font class="var">dist2</font> < 0)
+		return RecursiveBSPClipNodeSearch</font>(start, end, bsp, curnode</font>->children[1], <font class="var">hit</font>, plane);
+
+	<font class="com">//handle the segment being intersected by the plane</font>
+	<font class="var">frac</font> = <font class="var">dist1</font> / (<font class="var">dist1</font> - <font class="var">dist2</font>);
+	for (int i = 0; i < 3; i++)
+		split[i] = start[i] + frac * (end[i] - start[i]);
+
+	<font class="com">//this is the side that start is on</font>
+	side = (dist1 >= 0) ? 0 : 1;
+
+	<font class="com">//go through the children in order now
+	if (RecursiveBSPClipNodeSearch(start, split, bsp, curnode->children[side], hit, plane))
+		return 1;
+	return RecursiveBSPClipNodeSearch(split, end, bsp, curnode->children[1 - side], hit, plane);
+}
+				
+			</pre>
+		</p>
+	</div>
   </body>
   
 </html>
