@@ -17,7 +17,11 @@
       h2
       {
         color:white;
-      }
+      }	
+	.func{color:yellow;}
+	.var{color:powderblue;}
+	.struct{color:green}
+	.type{color:blue;}
     </style>
   </head>
   <body style="background-color:black">
@@ -34,24 +38,24 @@
     <div style="background-color:white">
       <br></br>
       <p class="block_text">
-          int RecursiveBSPNodeSearch(vec3_t point, bsp_t* bsp, int node)<br>
+          int <div class="func">RecursiveBSPNodeSearch</div>(vec3_t point, bsp_t* bsp, int node)<br>
           {<br>
 	         bspplane_t plane;<br>
 	         float res;<br>
 	         int nextnode;<br>
-
+		<br>
 	         if (node < 0)<br>
 		         return ~node;<br>
-
+		<br>
 	         plane = bsp->planes[bsp->nodes[node].plane_ofs];<br>
 	         res = DotProduct(plane.normal, point) - plane.dist;<br>
-
+		<br>
 	         if (res >= 0)<br>
 		         nextnode = bsp->nodes[node].children[0];<br>
 	         else<br>
 		         nextnode = bsp->nodes[node].children[1]; //back<br>
-
-	         RecursiveBSPNodeSearch(point, bsp, nextnode<br>
+		<br>
+	         RecursiveBSPNodeSearch(point, bsp, nextnode)<br>
          }<br>
           
         
