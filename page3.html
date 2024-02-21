@@ -38,25 +38,25 @@
       <br></br>
       <p class="block_text">
 	<pre>
-          int RecursiveBSPNodeSearch(<font color=green>vec3_t</font> point, <font color=green>bsp_t</font>* bsp, int node)
-          {
-	         bspplane_t plane;
-	         float res;
-	         int nextnode;
+int RecursiveBSPNodeSearch(<font class="struct">vec3_t</font> point, <font class="struct">bsp_t</font>* bsp, int node)
+{
+	bspplane_t plane;
+	float res;
+	int nextnode;
 		
-	         if (node < 0)
-		         return ~node;
+	if (node < 0)
+	        return ~node;
 		
-	         plane = bsp->planes[bsp->nodes[node].plane_ofs];
-	         res = DotProduct(plane.normal, point) - plane.dist;
-		<br>
-	         if (res >= 0)<br>
-		         nextnode = bsp->nodes[node].children[0];
-	         else<br>
-		         nextnode = bsp->nodes[node].children[1]; //back
+	plane = bsp->planes[bsp->nodes[node].plane_ofs];
+	res = DotProduct(plane.normal, point) - plane.dist;
 		
-	         RecursiveBSPNodeSearch(point, bsp, nextnode)<br>
-         }
+	if (res >= 0)
+		nextnode = bsp->nodes[node].children[0];
+	else
+		nextnode = bsp->nodes[node].children[1]; //back
+		
+	RecursiveBSPNodeSearch(point, bsp, nextnode)<br>
+}
           
         </pre>
       </p>
