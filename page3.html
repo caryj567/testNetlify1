@@ -34,8 +34,10 @@
     </p>
     
     <h2>BSP leaf search</h2>
-    <p>This function determines what leaf a point is in. It utilizes the splitting planes which divide the nodes.
-    	
+    <p>This function determines what leaf a point is in. It utilizes the splitting planes which divide the nodes. Depending
+	on what side of the plane a point is on, the function continues onto the front or the back child node. This continues
+	until a negative node index is encountered, at which point the function returns the bitwise inverse of this index. This
+	value is used as a leaf index.
     </p>
     <div style="background-color:white">
       <p class="block_text">
