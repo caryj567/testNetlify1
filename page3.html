@@ -38,24 +38,24 @@
       <br></br>
       <p class="block_text">
 	<pre>
-int RecursiveBSPNodeSearch(<font class="struct">vec3_t</font> point, <font class="struct">bsp_t</font>* bsp, int node)
+<font class="type">int</font> RecursiveBSPNodeSearch(<font class="struct">vec3_t</font> point, <font class="struct">bsp_t</font>* bsp, <font class="type">int</font> node)
 {
-	bspplane_t plane;
-	float res;
-	int nextnode;
+	<font class="struct">bspplane_t</font> plane;
+	<font class="type">float</font> res;
+	<font class="type">int</font> nextnode;
 		
-	if (node < 0)
+	if (<font class="var">node</font> < 0)
 	        return ~node;
 		
-	plane = bsp->planes[bsp->nodes[node].plane_ofs];
-	res = DotProduct(plane.normal, point) - plane.dist;
+	<font class="var">plane</font> = bsp->planes[bsp->nodes[node].plane_ofs];
+	<font class="var">res</font> = DotProduct(<font class="var">plane</font>.normal, point) - <font class="var">plane</font>.dist;
 		
-	if (res >= 0)
-		nextnode = bsp->nodes[node].children[0];
+	if (<font class="var">res >= 0)
+		<font class="var">nextnode = bsp->nodes[node].children[0];
 	else
-		nextnode = bsp->nodes[node].children[1]; //back
+		<font class="var">nextnode = bsp->nodes[node].children[1]; //back
 		
-	RecursiveBSPNodeSearch(point, bsp, nextnode)<br>
+	RecursiveBSPNodeSearch(point, bsp, <font class="var">nextnode</font>)<br>
 }
           
         </pre>
