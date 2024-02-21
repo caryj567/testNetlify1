@@ -67,7 +67,15 @@
     </div>
     
     <h2>BSP clip node search</h2>
-    <p>Explain here</p>
+    <p>This function utilizes a second BSP tree in the file which is used for collision. Here, a start and an end point
+   	are specified, and the function returns the point at which this line segment intersects the correct clip node as well
+	as the plane that it hit. This is generally the same idea as the above function, but is slightly more complicated
+	because it deals with a line segment instead of a point. If a segment lies entirely on one side of the splitting plane,
+	the function can be called again, advancing along the respective child. If the segment is split by a plane, the point
+	of intersection must be determined. Then, the function can be called using this intersection as the new end point.
+	If this results in an intersection with a wall, the function can end here. If it does not, the function must be
+	called again, using the intersection point as the start.
+    </p>
 	<div style="background-color:white">
 		<p class="block_text">
 			<pre>
@@ -98,9 +106,9 @@
 
 	<font class="com">//handle case where the segment lies entirely in a child</font>
 	if (<font class="var">dist1</font> >= 0 && <font class="var">dist2</font> >= 0)
-		return <font class="func">RecursiveBSPClipNodeSearch</font>(start, end, bsp, curnode->children[0], <font class="var">hit</font>, plane);
+		return <font class="func">RecursiveBSPClipNodeSearch</font>(start, end, bsp, <font class="var">curnode</font>->children[0], <font class="var">hit</font>, plane);
 	if (<font class="var">dist1</font> < 0 && <font class="var">dist2</font> < 0)
-		return <font class="func">RecursiveBSPClipNodeSearch</font>(start, end, bsp, curnode</font>->children[1], <font class="var">hit</font>, plane);
+		return <font class="func">RecursiveBSPClipNodeSearch</font>(start, end, bsp, <font class="var">curnode</font>->children[1], <font class="var">hit</font>, plane);
 
 	<font class="com">//handle the segment being intersected by the plane</font>
 	<font class="var">frac</font> = <font class="var">dist1</font> / (<font class="var">dist1</font> - <font class="var">dist2</font>);
