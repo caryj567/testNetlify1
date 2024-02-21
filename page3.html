@@ -71,7 +71,7 @@
 	<div style="background-color:white">
 		<p class="block_text">
 			<pre>
-<font class="type">int</font> RecursiveBSPClipNodeSearch</font>(<font class="struct">vec3_t</font> start, <font class="struct">vec3_t</font> end, <font class="struct">bsp_t</font>* bsp, <font class="type">int</font> node, <font class="struct">vec3_t</font> hit, <font class="struct">bspplane_t</font>*& plane)
+<font class="type">int</font> <font class="func">RecursiveBSPClipNodeSearch</font>(<font class="struct">vec3_t</font> start, <font class="struct">vec3_t</font> end, <font class="struct">bsp_t</font>* bsp, <font class="type">int</font> node, <font class="struct">vec3_t</font> hit, <font class="struct">bspplane_t</font>*& plane)
 {
 	<font class="struct">bspclip_t</font>* <font class="var">curnode</font>;
 	<font class="type">float</font> <font class="var">dist1</font>, <font class="var">dist2</font>;
@@ -79,7 +79,7 @@
 	<font class="struct">vec3_t</font> <font class="var">split</font>;
 	<font class="type">bool</font> <font class="var">side</font>;
 
-	//handle leaves
+	<font class="com">//handle leaves</font>
 	if (node == <font class="def">CONTENTS_SOLID</font>)
 	{
 		VecCopy</font>(<font class="var">hit</font>, start);
@@ -111,9 +111,9 @@
 	<font class="var">side</font> = (<font class="var">dist1</font> >= 0) ? 0 : 1;
 
 	<font class="com">//go through the children in order now</font>
-	if (RecursiveBSPClipNodeSearch(start, <font class="var">split</font>, bsp, curnode->children[<font class="var">side</font>], <font class="var">hit</font>, plane))
+	if (<font class="func">RecursiveBSPClipNodeSearch</font>(start, <font class="var">split</font>, bsp, curnode->children[<font class="var">side</font>], <font class="var">hit</font>, plane))
 		return 1;
-	return RecursiveBSPClipNodeSearch(<font class="var">split</font>, end, bsp, curnode->children[1 - <font class="var">side</font>], <font class="var">hit</font>, plane);
+	return <font class="func">RecursiveBSPClipNodeSearch</font>(<font class="var">split</font>, end, bsp, curnode->children[1 - <font class="var">side</font>], <font class="var">hit</font>, plane);
 }
 				
 			</pre>
